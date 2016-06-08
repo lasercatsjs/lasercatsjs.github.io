@@ -217,7 +217,7 @@ LaserCats.prototype = {
         this.player.sendMousePositions(this.mice.children); // an array is passed
         this.action = this.player.getAction();
         currState = this.getPositions(this.cat,this.mice.children,this.rats.children,this.lasers.children);
-        //console.log(currState);
+                //.log(currState);
         currFeat = this.getFeatures(currState);
         index2 = currFeat.indexOf(1);
 
@@ -257,7 +257,16 @@ LaserCats.prototype = {
             a = a_vec[index2][i];
             b = b_vec[index2][i];
             // First sample w from Ga(a,b), where b is rate
-            w = gammaRand(a, b);
+              //console.log("Test = ")
+              //console.log(normalRand(30000*(1/3000), Math.pow(1/3000, 2)*30000));
+            //console.log(gammaRand(100, 3000));
+            if (a < 100) {
+                w = gammaRand(a, b);
+            } else {
+                w = normalRand(a*b, Math.pow(b,2)*a);
+            }
+              //console.log("w = ");
+              //console.log(w);
             theta = normalRand(zai, 1/(c*w));
             // Store the mean for action i
             theta_vec[i] = theta
